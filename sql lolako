@@ -1,0 +1,111 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 08, 2025 at 12:34 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `lolako_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seniors`
+--
+
+CREATE TABLE `seniors` (
+  `id` int(11) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `middlename` varchar(100) DEFAULT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `age` int(11) NOT NULL,
+  `barangay` varchar(100) NOT NULL,
+  `number` varchar(50) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `seniors`
+--
+
+INSERT INTO `seniors` (`id`, `firstname`, `middlename`, `lastname`, `age`, `barangay`, `number`, `deleted`) VALUES
+(1, 'loren', 'M', 'dacol', 78, 'vista villa', '09972959221', 1),
+(2, 'loren', 'M', 'dacol', 78, 'vista villa', '09972959221', 0),
+(3, 'rushel', 'A', 'Hinoyog', 76, 'Tankulan Manolo Fortich', '2133241', 1),
+(4, 'angelo', 'D', 'cabana', 79, 'mantibugao manolo fortich bukidnon', '2314567', 0),
+(5, 'mariel', 'D', 'saraum', 78, 'vista villa', '43567689', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('user','admin') NOT NULL DEFAULT 'user',
+  `firstname` varchar(100) DEFAULT NULL,
+  `lastname` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `role`, `firstname`, `lastname`) VALUES
+(1, 'admin', '$2y$10$I66f5EeP0XbWf.1VmG2PCORC5/RgmeA7QfSbgdEBVmEdb3AunbeVy', 'admin', 'Admin', 'User'),
+(4, 'angelo@gmail.com', '$2y$10$85Kv4KwruiF7gqVHt5KMVeTskxPLAp9S7nb1btRJzNoYoTgW4tmd.', 'user', NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `seniors`
+--
+ALTER TABLE `seniors`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `seniors`
+--
+ALTER TABLE `seniors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
