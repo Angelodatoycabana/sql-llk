@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2025 at 12:34 AM
+-- Generation Time: Sep 11, 2025 at 01:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `start` datetime NOT NULL,
+  `end` datetime DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `title`, `start`, `end`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'Release of Pensions', '2025-09-11 09:00:00', '2025-09-19 17:00:00', NULL, '2025-09-08 05:35:25', '2025-09-08 05:35:25'),
+(3, 'My Birthday', '2025-09-09 00:00:00', NULL, NULL, '2025-09-08 06:48:46', '2025-09-08 06:48:46');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `seniors`
 --
 
@@ -33,6 +57,7 @@ CREATE TABLE `seniors` (
   `middlename` varchar(100) DEFAULT NULL,
   `lastname` varchar(100) NOT NULL,
   `age` int(11) NOT NULL,
+  `gender` enum('Male','Female') NOT NULL,
   `barangay` varchar(100) NOT NULL,
   `number` varchar(50) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT 0
@@ -42,12 +67,16 @@ CREATE TABLE `seniors` (
 -- Dumping data for table `seniors`
 --
 
-INSERT INTO `seniors` (`id`, `firstname`, `middlename`, `lastname`, `age`, `barangay`, `number`, `deleted`) VALUES
-(1, 'loren', 'M', 'dacol', 78, 'vista villa', '09972959221', 1),
-(2, 'loren', 'M', 'dacol', 78, 'vista villa', '09972959221', 0),
-(3, 'rushel', 'A', 'Hinoyog', 76, 'Tankulan Manolo Fortich', '2133241', 1),
-(4, 'angelo', 'D', 'cabana', 79, 'mantibugao manolo fortich bukidnon', '2314567', 0),
-(5, 'mariel', 'D', 'saraum', 78, 'vista villa', '43567689', 1);
+INSERT INTO `seniors` (`id`, `firstname`, `middlename`, `lastname`, `age`, `gender`, `barangay`, `number`, `deleted`) VALUES
+(1, 'loren', 'M', 'dacol', 78, 'Female', 'vista villa', '09972959221', 1),
+(2, 'loren', 'M', 'dacol', 78, 'Female', 'vista villa', '09972959221', 1),
+(3, 'rushel', 'A', 'Hinoyog', 76, 'Female', 'Tankulan Manolo Fortich', '2133241', 1),
+(4, 'angelo', 'D', 'cabana', 79, 'Female', 'mantibugao manolo fortich bukidnon', '2314567', 1),
+(5, 'mariel', 'D', 'saraum', 78, 'Female', 'vista villa', '43567689', 1),
+(6, 'lore', '12', '2sa', 21, 'Male', '123', '2313', 0),
+(7, '213', '423', 'ret', 324, 'Male', '234', '32', 1),
+(8, 'angela', 'd', 'Cabana', 23, 'Male', '2', '23', 0),
+(9, '123', '2edw', 'sad', 23, 'Female', '2', '23', 1);
 
 -- --------------------------------------------------------
 
@@ -70,11 +99,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `firstname`, `lastname`) VALUES
 (1, 'admin', '$2y$10$I66f5EeP0XbWf.1VmG2PCORC5/RgmeA7QfSbgdEBVmEdb3AunbeVy', 'admin', 'Admin', 'User'),
-(4, 'angelo@gmail.com', '$2y$10$85Kv4KwruiF7gqVHt5KMVeTskxPLAp9S7nb1btRJzNoYoTgW4tmd.', 'user', NULL, NULL);
+(4, 'angelo@gmail.com', '$2y$10$85Kv4KwruiF7gqVHt5KMVeTskxPLAp9S7nb1btRJzNoYoTgW4tmd.', 'user', NULL, NULL),
+(5, 'angelo1@gmail.com', '$2y$10$YZHXHLDlSh1KEnIhLljJO.6.LKy6f.oPO7sKAZqIJM1CiE1nLgq/m', 'user', NULL, NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `seniors`
@@ -94,16 +130,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `seniors`
 --
 ALTER TABLE `seniors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
